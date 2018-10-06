@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class catalog="parainfo" name="hibernate.Distritos" table="distritos">
+        <id name="iddistrito" type="java.lang.Integer">
+            <column name="iddistrito"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="hibernate.Provincias" fetch="select" name="provincias">
+            <column name="idprovincia" not-null="true"/>
+        </many-to-one>
+        <property name="distrito" type="string">
+            <column length="50" name="distrito" not-null="true"/>
+        </property>
+    
+    <!-- views -->
+        <query name="peru">
+            <![CDATA[
+                select
+                    provincias.departamentos.departamento,
+                    provincias.provincia,
+                    distrito
+                from
+                    Distritos
+            ]]>
+        </query>
+
+    </class>
+</hibernate-mapping>

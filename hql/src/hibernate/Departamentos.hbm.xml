@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/09/2013 08:13:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="parainfo" name="hibernate.Departamentos" table="departamentos">
+    <id name="iddepartamento" type="java.lang.Integer">
+      <column name="iddepartamento"/>
+      <generator class="identity"/>
+    </id>
+    <property name="departamento" type="string">
+      <column length="50" name="departamento" not-null="true"/>
+    </property>
+    <set inverse="true" name="provinciases">
+      <key>
+        <column name="iddepartamento" not-null="true"/>
+      </key>
+      <one-to-many class="hibernate.Provincias"/>
+    </set>
+  </class>
+</hibernate-mapping>

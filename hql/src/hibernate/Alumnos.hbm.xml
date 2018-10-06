@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <!-- catalog : nombre de la base de datos--> 
+  <class catalog="parainfo" name="hibernate.Alumnos" table="alumnos">
+    <id name="idalumno" type="java.lang.Integer"> <!-- Alumnos.java --> 
+      <column name="idalumno"/> <!-- db --> 
+      <generator class="identity"/> <!-- autoincrementar --> 
+    </id>
+    <property name="nombre" type="string">
+      <column length="50" name="nombre" not-null="true" unique="true"/>
+    </property>
+    <set inverse="true" name="notases">
+      <key>
+        <column name="idalumno" not-null="true"/>
+      </key>
+      <one-to-many class="hibernate.Notas"/>
+    </set>
+  </class>
+</hibernate-mapping>

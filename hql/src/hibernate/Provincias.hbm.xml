@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/09/2013 08:13:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="parainfo" name="hibernate.Provincias" table="provincias">
+    <id name="idprovincia" type="java.lang.Integer">
+      <column name="idprovincia"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="hibernate.Departamentos" fetch="select" name="departamentos">
+      <column name="iddepartamento" not-null="true"/>
+    </many-to-one>
+    <property name="provincia" type="string">
+      <column length="50" name="provincia" not-null="true"/>
+    </property>
+    <set inverse="true" name="distritoses">
+      <key>
+        <column name="idprovincia" not-null="true"/>
+      </key>
+      <one-to-many class="hibernate.Distritos"/>
+    </set>
+  </class>
+</hibernate-mapping>
