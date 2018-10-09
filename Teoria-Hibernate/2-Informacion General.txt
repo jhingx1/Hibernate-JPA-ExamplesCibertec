@@ -1,0 +1,22 @@
+Hibernate es una Object- R elational M solución apping (ORM) para JAVA. 
+
+Hibernate asigna clases de Java a tablas de bases de datos y de tipos de datos de Java a tipos de datos de SQL y libera al desarrollador del 95% de las tareas de programación comunes relacionadas con la persistencia de datos.
+
+Hibernate se ubica entre los objetos Java tradicionales y el servidor de bases de datos para manejar todos los trabajos en la persistencia de esos objetos basados ??en los mecanismos y patrones de O / R apropiados.
+
+java Object --- ORM(Hibernate) --- RDBMS
+
+Ventajas de hibernar
+
+Hibernate se encarga de asignar clases de Java a tablas de base de datos utilizando archivos XML y sin escribir ninguna línea de código.
+
+Si hay cambios en la base de datos o en cualquier tabla, entonces solo necesita cambiar las propiedades del archivo XML.
+
+Resume los tipos de SQL desconocidos y proporciona una manera de trabajar alrededor de los objetos Java conocidos.
+
+Hibernate no requiere un servidor de aplicaciones para funcionar.
+
+Manipula asociaciones complejas de objetos de tu base de datos.
+
+Minimiza el acceso a la base de datos con estrategias de búsqueda inteligente.
+
