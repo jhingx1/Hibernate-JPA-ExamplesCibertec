@@ -1,0 +1,29 @@
+Existe un desface-desajuste con el mapeo de las clases de java con el modelo relacional.
+
+Diferencias - Problemas
+
+Identidad
+
+Un RDBMS define exactamente una noción de "igualdad": la clave principal. Sin embargo, Java define tanto la identidad del objeto (a == b) como la igualdad del objeto (a.equals (b)).
+
+Asociaciones
+
+Los lenguajes orientados a objetos representan asociaciones usando referencias de objetos, mientras que un RDBMS representa una asociación como una columna de clave externa.
+
+El O bject- R elational M apping (ORM) es la solución para manejar todos los desajustes de impedancia anteriores.
+
+ORM significa O bject- R elational M apping (ORM) es una técnica de programación para convertir datos entre bases de datos relacionales y lenguajes de programación orientados a objetos, como Java, C #, etc.
+
+Ventajas:
+
+Oculta los detalles de las consultas SQL de la lógica OO.
+No hay necesidad de lidiar con la implementación de la base de datos.
+Entidades basadas en conceptos de negocio en lugar de estructura de base de datos.
+
+Una solución ORM consiste en las siguientes cuatro entidades:
+
+Una API para realizar operaciones básicas de CRUD en objetos de clases persistentes.
+Un lenguaje o API para especificar consultas que se refieren a clases y propiedades de clases.
+Una facilidad configurable para especificar metadatos de mapeo.
+Una técnica para interactuar con objetos transaccionales para realizar comprobaciones sucias, búsqueda de asociación lenta y otras funciones de optimización.
+
