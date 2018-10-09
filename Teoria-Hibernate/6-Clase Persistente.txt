@@ -1,0 +1,29 @@
+El concepto completo de Hibernate es tomar los valores de los atributos de clase de Java y conservarlos 
+en una tabla de base de datos. 
+
+Un documento de mapeo ayuda a Hibernate a determinar cómo extraer los valores de las clases y mapearlos 
+con la tabla y los campos asociados.
+
+Las clases Java cuyos objetos o instancias se almacenarán en tablas de bases de datos se denominan 
+clases persistentes en Hibernate.
+
+Hibernate funciona mejor si estas clases siguen algunas reglas simples, también conocidas como el modelo 
+de programación Plain Old Java Object (POJO).
+
+- Todas las clases de Java que se conservarán necesitan un constructor predeterminado.
+
+- Todas las clases deben contener una ID para permitir una fácil identificación de sus 
+	objetos dentro de Hibernate y la base de datos. Esta propiedad se asigna a la 
+	columna de clave principal de una tabla de base de datos.
+
+- Todos los atributos que se conservarán deben declararse privados y deben tener los 
+	métodos getXXX y setXXX definidos en el estilo JavaBean.
+
+- Una característica central de Hibernate, los proxies, depende de que la clase persistente 
+	sea no final o la implementación de una interfaz que declare todos los métodos públicos.
+
+-Todas las clases que no extienden o implementan algunas clases e interfaces especializadas 
+	requeridas por el marco EJB.
+
+El nombre POJO se usa para enfatizar que un objeto dado es un Objeto Java ordinario, no un objeto 
+especial, y en particular no es un Enterprise JavaBean.
