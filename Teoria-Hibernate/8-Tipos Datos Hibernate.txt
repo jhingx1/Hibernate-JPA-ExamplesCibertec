@@ -1,0 +1,49 @@
+Cuando prepara un documento de mapeo de Hibernate, encuentra que asigna los tipos de datos de Java a 
+los tipos de datos RDBMS. 
+
+Los tipos declarados y utilizados en los archivos de mapeo no son tipos de datos Java; Tampoco 
+son tipos de bases de datos SQL.
+
+Estos tipos se denominan tipos de mapeo de Hibernate , que se pueden traducir de Java a tipos 
+de datos SQL y viceversa.
+
+Todos los tipos básicos, de fecha y hora, de objetos grandes y otros tipos de mapeo integrados.
+
+Tipos primitivos
+
+integer	      int or java.lang.Integer	       INTEGER
+long	      long or java.lang.Long	       BIGINT
+short	      short or java.lang.Short	       SMALLINT
+float	      float or java.lang.Float	       FLOAT
+double	      double or java.lang.Double       DOUBLE
+big_decimal   java.math.BigDecimal	       NUMERIC
+character     java.lang.String	               CHAR(1)
+string	      java.lang.String	               VARCHAR
+byte	      byte or java.lang.Byte	       TINYINT
+boolean	      boolean or java.lang.Boolean     BIT
+yes/no	      boolean or java.lang.Boolean     CHAR(1) ('Y' or 'N')
+true/false    boolean or java.lang.Boolean     CHAR(1) ('T' or 'F')
+
+Tipos de fecha y hora
+
+date	        java.util.Date or java.sql.Date	        DATE
+time	        java.util.Date or java.sql.Time	        TIME
+timestamp	java.util.Date or java.sql.Timestamp	TIMESTAMP
+calendar	java.util.Calendar	                TIMESTAMP
+calendar_date	java.util.Calendar	                DATE
+
+Tipos de objetos binarios y grandes
+
+binary	        byte[]	                                                VARBINARY (or BLOB)
+text	        java.lang.String	                                CLOB
+serializable	any Java class that implements java.io.Serializable	VARBINARY (or BLOB)
+clob	        java.sql.Clob	                                        CLOB
+blob	        java.sql.Blob	                                        BLOB
+
+
+Tipos relacionados con JDK
+
+class	        java.lang.Class	        VARCHAR
+locale	        java.util.Locale	VARCHAR
+timezone	java.util.TimeZone	VARCHAR
+currency	java.util.Currency	VARCHAR
