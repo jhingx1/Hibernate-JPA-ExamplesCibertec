@@ -1,0 +1,148 @@
+Hasta ahora, hemos visto un mapeado O / R muy básico con hibernación, pero hay tres temas de mapeo más 
+importantes, que debemos aprender en detalle.
+
+Estos son:
+-Mapeo de colecciones
+-Mapeo de asociaciones entre clases de entidad, y
+-Asignaciones de componentes.
+
+Asignaciones de colecciones
+===========================
+
+Si una entidad o clase tiene una colección de valores para una variable en particular, entonces podemos 
+mapear esos valores usando cualquiera de las interfaces de colección disponibles en Java.
+
+Hibernate puede persistir instancias de java.util.Map, java.util.Set, java.util.SortedMap, 
+java.util.SortedSet, java.util.List y cualquier conjunto de entidades o valores persistentes.
+
+java.util.Set
+	- Esto se asigna con un elemento <set> y se inicializa con java.util.HashSet
+
+EJM:
+
+Un Set es una colección java que no contiene ningún elemento duplicado.
+
+Más formalmente, los conjuntos no contienen pares de elementos e1 y e2, de modo que e1.equals (e2), y 
+como máximo, un elemento nulo.
+
+Por lo tanto, los objetos que se agreguen a un conjunto deben implementar los métodos equals() y hashCode() 
+para que Java pueda determinar si alguno de los dos elementos/objetos es idéntico.
+
+Un conjunto se asigna con un elemento <set> en la tabla de asignación y se inicializa con java.util.HashSet. 
+Puede usar Set collection en su clase cuando no se requiere ningún elemento duplicado en la colección.
+
+Definir tablas RDBMS
+
+Considere una situación en la que necesitamos almacenar nuestros registros de empleados en la tabla EMPLEADO, 
+que tendría la siguiente estructura:
+
+create table EMPLOYEE (
+   id INT NOT NULL auto_increment,
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL,
+   PRIMARY KEY (id)
+);
+
+Además, asuma que cada empleado puede tener uno o más certificados asociados con él / ella.
+Por lo tanto, almacenaremos la información relacionada con el certificado en una tabla separada 
+que tenga la siguiente estructura:
+
+create table CERTIFICATE (
+   id INT NOT NULL auto_increment,
+   certificate_name VARCHAR(30) default NULL,
+   employee_id INT default NULL,
+   PRIMARY KEY (id)
+);
+
+Habrá una relación de uno a varios entre los objetos EMPLEADO y CERTIFICADO:
+
+Definir clases de POJO
+======================
+
+Implementemos nuestra clase POJO Employee, que se usará para conservar los objetos relacionados con la 
+tabla EMPLOYEE y tener una colección de certificados en la variable Set .
+
+--Ver Ejemplo-completo: hibernate-EjmSerMapping
+
+public class Employee {
+   private int id;
+   private String firstName; 
+   private String lastName;   
+   private int salary;
+   private Set certificates;   //notar que es una lista
+
+Ahora definamos otra clase POJO correspondiente a la tabla CERTIFICATE para que los objetos de 
+certificado puedan almacenarse y recuperarse en la tabla CERTIFICATE.
+
+Esta clase también debe implementar los métodos equals() y hashCode() para que Java pueda 
+determinar si alguno de los dos elementos / objetos es idéntico.
+
+--Ver Ejemplo-completo: hibernate-EjmSerMapping
+
+public class Certificate {
+   private int id;
+   private String name;
+
+Definir archivo de mapeo de hibernación
+=======================================
+
+Vamos a desarrollar nuestro archivo de mapeo, que le indica a Hibernate cómo asignar las 
+clases definidas a las tablas de la base de datos.
+
+El elemento <set> se utilizará para definir la regla para la colección de conjuntos utilizada.
+
+    <class name = "Employee" table = "EMPLOYEE">      
+      <meta attribute = "class-description">
+         This class contains the employee detail. 
+      </meta>      
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>      
+      <set name = "certificates" cascade="all">
+         <key column = "employee_id"/>
+         <one-to-many class="Certificate"/>
+      </set>      
+      <property name = "firstName" column = "first_name" type = "string"/>
+      <property name = "lastName" column = "last_name" type = "string"/>
+      <property name = "salary" column = "salary" type = "int"/>
+      
+   </class>
+
+   <class name = "Certificate" table = "CERTIFICATE">      
+      <meta attribute = "class-description">
+         This class contains the certificate records. 
+      </meta>      
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>      
+      <property name = "name" column = "certificate_name" type = "string"/>      
+   </class>
+
+Guardamos nuestro documento de mapeo en el archivo Employee.hbm.xml.
+
+El elemento <set> es nuevo aquí y se ha introducido para establecer la relación entre las 
+clases Certificate y Employee. 
+
+Usamos el atributo de cascada en el elemento <set> para decirle a Hibernate que persista 
+los objetos del Certificado al mismo tiempo que los objetos del Empleado.
+
+El atributo de "name" se establece en la variable de conjunto definida en la clase principal, 
+en nuestro caso son certificados.
+
+Para cada variable de conjunto, necesitamos definir un elemento de conjunto separado en el archivo de mapeo.
+
+El elemento <key> es la columna en la tabla CERTIFICATE que contiene la clave externa para el objeto 
+principal, es decir, la tabla EMPLOYEE.
+
+El elemento <one-to-many> indica que un objeto Employee se relaciona con muchos objetos Certificate y, 
+como tal, el objeto Certificate debe tener un padre Employee asociado.
+
+Puede usar los elementos <one- to-one> , <many-to-one> o <many-to-many> según su requisito.
+
+Crear clase de aplicación
+=========================
+
+
+
+
