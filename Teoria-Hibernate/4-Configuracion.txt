@@ -1,0 +1,60 @@
+Hibernate también requiere un conjunto de ajustes de configuración relacionados con la base de datos y otros 
+parámetros relacionados. 
+
+Toda esta información generalmente se proporciona como un archivo de propiedades Java estándar 
+llamado hibernate.properties , o como un archivo XML llamado hibernate.cfg.xml .
+
+Consideraré el archivo con formato XML hibernate.cfg.xml para especificar las propiedades 
+de Hibernate requeridas en mis ejemplos.
+
+Este archivo se guarda en el directorio raíz de la ruta de clase de su aplicación.
+
+Propiedades de hibernación
+==========================
+
+A continuación se muestra la lista de propiedades importantes, se le solicitará que configure una 
+base de datos en una situación independiente:
+
+hibernate.dialect
+Esta propiedad hace que Hibernate genere el SQL apropiado para la base de datos elegida.
+
+hibernate.connection.driver_class
+La clase de controlador JDBC.
+
+hibernate.connection.url
+La URL de JDBC a la instancia de la base de datos.
+
+hibernate.connection.username
+El nombre de usuario de la base de datos.
+
+hibernate.connection.password
+La contraseña de la base de datos.
+
+hibernate.connection.pool_size
+Limita el número de conexiones en espera en el grupo de conexiones de la base de datos de Hibernate.
+
+hibernate.connection.autocommit
+Permite utilizar el modo de confirmación automática para la conexión JDBC.
+
+=========
+
+Si está utilizando una base de datos junto con un servidor de aplicaciones y JNDI, entonces tendría que 
+configurar las siguientes propiedades:
+
+hibernate.connection.datasource
+El nombre JNDI definido en el contexto del servidor de aplicaciones, que está utilizando para la aplicación.
+
+hibernate.jndi.class
+La clase InitialContext para JNDI.
+
+hibernate.jndi. <JNDIpropertyname>
+Pasa cualquier propiedad JNDI que te guste al JNDI InitialContext.
+
+hibernate.jndi.url
+Proporciona la URL para JNDI.
+
+hibernate.connection.username
+El nombre de usuario de la base de datos.
+
+hibernate.connection.password
+La contraseña de la base de datos.
