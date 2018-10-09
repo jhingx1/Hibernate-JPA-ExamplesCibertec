@@ -1,0 +1,140 @@
+Las asignaciones de objetos / relacionales generalmente se definen en un documento XML.
+
+Este archivo de asignación instruye a Hibernate: ¿cómo asignar la clase o clases definidas 
+a las tablas de la base de datos?
+
+Consideremos nuestra clase POJO previamente definida cuyos objetos persistirán en la 
+tabla definida en la siguiente sección.
+
+public class Employee {
+   private int id;
+   private String firstName; 
+   private String lastName;   
+   private int salary;  
+   
+   //contructor por defecto
+   public Employee() {}
+   
+   public Employee(String fname, String lname, int salary) {
+      this.firstName = fname;
+      this.lastName = lname;
+      this.salary = salary;
+   }
+   
+   //identificador
+   public int getId() {
+      return id;
+   }
+   
+   public void setId( int id ) {
+      this.id = id;
+   }
+   
+   public String getFirstName() {
+      return firstName;
+   }
+   
+   public void setFirstName( String first_name ) {
+      this.firstName = first_name;
+   }
+   
+   public String getLastName() {
+      return lastName;
+   }
+   
+   public void setLastName( String last_name ) {
+      this.lastName = last_name;
+   }
+   
+   public int getSalary() {
+      return salary;
+   }
+   
+   public void setSalary( int salary ) {
+      this.salary = salary;
+   }
+}
+
+
+Habría una tabla correspondiente a cada objeto que está dispuesto a proporcionar persistencia. 
+Tenga en cuenta que los objetos anteriores deben almacenarse y recuperarse en la siguiente tabla RDBMS:
+
+create table EMPLOYEE (
+   id INT NOT NULL auto_increment,
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL,
+   PRIMARY KEY (id)
+);
+
+Basándonos en las dos entidades anteriores, podemos definir el siguiente archivo de asignación, 
+que le indica a Hibernate cómo asignar la clase o clases definidas a las tablas de la base de datos.
+
+
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "Employee" table = "EMPLOYEE">
+      
+      <meta attribute = "class-description">
+         This class contains the employee detail. 
+      </meta>
+      
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "firstName" column = "first_name" type = "string"/>
+      <property name = "lastName" column = "last_name" type = "string"/>
+      <property name = "salary" column = "salary" type = "int"/>
+      
+   </class>
+</hibernate-mapping>
+
+Debe guardar el documento de mapeo en un archivo con el formato <nombre_clase> .hbm.xml. 
+Guardamos nuestro documento de mapeo en el archivo Employee.hbm.xml.
+
+Veamos un poco de detalle sobre los elementos de mapeo utilizados en el archivo de mapeo:
+====
+
+El documento de mapeo es un documento XML que tiene <hibernate-mapping> como elemento raíz, 
+que contiene todos los elementos <class> .
+
+Los elementos <clase> se utilizan para definir asignaciones específicas de una clase de Java a 
+las tablas de la base de datos. 
+
+El nombre de la clase de Java se especifica mediante el atributo de "name" del elemento de clase 
+y el nombre de la tabla de la base de datos se especifica mediante el atributo "table".
+
+El elemento <meta> es un elemento opcional y se puede usar para crear la descripción de la clase.
+
+El elemento <id> asigna el atributo de ID único en clase a la clave principal de la tabla de base de datos.
+
+El atributo de "name" del elemento id se refiere a la propiedad en la clase y el atributo de "column" se 
+refiere a la columna en la tabla de la base de datos. 
+
+El atributo de tipo contiene el tipo de asignación de hibernaten, estos tipos de asignación se 
+convertirán de Java a tipo de datos SQL.
+
+El elemento <generator> dentro del elemento id se usa para generar los valores de la clave primaria 
+automáticamente.
+
+El atributo de clase del elemento generador se establece en nativo para permitir que la hibernación recoja 
+la identidad, la secuencia o el algoritmo de hilo para crear una clave principal, según las capacidades de 
+la base de datos subyacente.
+
+El elemento <property> se utiliza para asignar una propiedad de clase Java a una columna en la tabla 
+de la base de datos.
+
+El atributo de "name" del elemento se refiere a la propiedad en la clase y el atributo de "columns" se refiere 
+a la columna en la tabla de la base de datos. 
+
+El atributo de tipo contiene el tipo de asignación de hibernación, estos tipos de asignación se convertirán de 
+Java a tipo de datos SQL.
+
+
+
+
