@@ -1,0 +1,127 @@
+Una sesión se utiliza para obtener una conexión física con una base de datos. 
+
+El objeto Session es ligero y está diseñado para ser instanciado cada vez que se necesita una interacción con 
+la base de datos. 
+
+Los objetos persistentes se guardan y recuperan a través de un objeto Session.
+
+Los objetos de la sesión no deben mantenerse abiertos durante mucho tiempo, ya que generalmente no son seguros 
+para subprocesos y deben crearse y destruirse según sea necesario.
+
+La función principal de la sesión es ofrecer, crear, leer y eliminar operaciones para instancias de clases 
+de entidades asignadas.
+
+Las instancias pueden existir en uno de los siguientes tres estados en un momento dado:
+
+transient - transitorio 
+	Una nueva instancia de una clase persistente, que no está asociada con una sesión y 
+	no tiene representación en la base de datos y ningún valor de identificador se considera transitorio 
+	por Hibernate.
+	
+persistent - persistente
+	puede hacer que una instancia transitoria sea persistente al asociarla con una sesión. 
+	Una instancia persistente tiene una representación en la base de datos, un valor de 
+	identificador y está asociada con una sesión.
+	
+detached - desconectado
+	una vez que cerramos la sesión de hibernación, la instancia persistente se convertirá en una 
+	instancia separada.
+	
+Una instancia de sesión es serializable si sus clases persistentes son serializables. Una transacción típica 
+debería usar el siguiente idioma:
+
+===============================
+
+Session session = factory.openSession();
+Transaction tx = null;
+
+try {
+   tx = session.beginTransaction(); //inicio de la sesion
+   // do some work
+   ...
+   tx.commit();
+}
+
+catch (Exception e) {
+   if (tx!=null) tx.rollback();
+   e.printStackTrace(); 
+} finally {
+   session.close();
+}
+
+================================
+
+Si la sesión produce una excepción, la transacción debe retrotraerse y la sesión debe descartarse.
+
+Métodos de interfaz de sesión
+=============================
+
+Transaction beginTransaction()
+Comience una unidad de trabajo y devuelva el objeto Transacción asociado.
+
+void cancelQuery()
+Cancelar la ejecución de la consulta actual.
+
+void clear()
+Borrar completamente la sesión.
+	
+Connection close()
+Finalice la sesión liberando la conexión JDBC y limpiando.
+
+Criteria createCriteria(Class persistentClass)
+Cree una nueva instancia de Criteria, para la clase de entidad dada, o una superclase de una clase de entidad.
+
+Criteria createCriteria(String entityName)
+Cree una nueva instancia de Criteria, para el nombre de la entidad dada.
+
+Serializable getIdentifier(Object object)
+Devuelva el valor de identificador de la entidad dada como asociado con esta sesión.
+
+Query createFilter(Object collection, String queryString)
+Cree una nueva instancia de Consulta para la colección dada y la cadena de filtro.
+
+Query createQuery(String queryString)
+Cree una nueva instancia de Consulta para la cadena de consulta HQL dada.
+
+SQLQuery createSQLQuery(String queryString)
+Cree una nueva instancia de SQLQuery para la cadena de consulta SQL dada.
+
+void delete(Object object)
+Eliminar una instancia persistente del almacén de datos.
+
+void delete(String entityName, Object object)
+Eliminar una instancia persistente del almacén de datos.
+
+Session get(String entityName, Serializable id)
+Devuelve la instancia persistente de la entidad nombrada dada con el identificador dado, 
+o nula si no existe tal instancia persistente.
+
+SessionFactory getSessionFactory()
+Obtener la fábrica de sesión que creó esta sesión.
+
+void refresh(Object object)
+Vuelva a leer el estado de la instancia dada de la base de datos subyacente.
+
+Transaction getTransaction()
+Obtenga la instancia de Transacción asociada a esta sesión.
+
+boolean isConnected()
+Compruebe si la sesión está conectada actualmente.
+
+boolean isDirty()
+¿Esta sesión contiene algún cambio que deba sincronizarse con la base de datos?
+
+boolean isOpen()
+Compruebe si la sesión sigue abierta.
+
+Serializable save(Object object)
+Persistir la instancia transitoria dada, primero asignando un identificador generado.
+
+void saveOrUpdate(Object object)
+Guarde (Objeto) o actualice (Objeto) la instancia dada.
+
+void update(Object object)
+Actualice la instancia persistente con el identificador de la instancia separada dada.
+
+void update(String entityName, Object object)
+Actualice la instancia persistente con el identificador de la instancia separada dada.
