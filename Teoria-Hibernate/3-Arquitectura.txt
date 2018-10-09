@@ -1,0 +1,98 @@
+Arquitectura
+
+			Java Application
+			Persistent Object
+			   Hibernate
+		Hibernate.propeties XML Mapping
+				Data Base
+
+Objeto de configuración
+=======================
+
+El objeto de configuración es el primer objeto de hibernación que crea en cualquier aplicación de hibernación. 
+Normalmente se crea solo una vez durante la inicialización de la aplicación. 
+Representa un archivo de configuración o propiedades requerido por el Hibernate.
+
+El objeto de configuración proporciona dos componentes claves:
+
+Conexión de base de datos - Database Connection : se maneja a través de uno o más archivos de configuración 
+compatibles con Hibernate.
+
+Estos archivos son : 
+	- hibernate.properties
+	- hibernate.cfg.xml
+
+Configuración de asignación de clase - Class Mapping Setup: este componente crea la conexión entre las clases de 
+Java y las tablas de la base de datos.
+
+Objeto SessionFactory
+=====================
+
+El objeto de configuración se utiliza para crear un objeto SessionFactory que, a su vez, configura Hibernate 
+para la aplicación utilizando el archivo de configuración suministrado y permite crear una instancia de un 
+objeto Session. 
+
+SessionFactory es un objeto seguro para subprocesos y es utilizado por todos los subprocesos de una aplicación.
+
+El SessionFactory es un objeto pesado; Por lo general, se crea durante el inicio de la aplicación y se 
+mantiene para su uso posterior. 
+
+Necesitaría un objeto SessionFactory por base de datos utilizando un archivo de configuración separado. Por lo 
+tanto, si está utilizando varias bases de datos, tendría que crear varios objetos SessionFactory.
+
+Objeto de sesión - Session Object
+==================================
+
+Una sesión se utiliza para obtener una conexión física con una base de datos. 
+
+El objeto Session es ligero y está diseñado para ser instanciado cada vez que se necesita una interacción con 
+la base de datos. Los objetos persistentes se guardan y recuperan a través de un objeto Session.
+
+Los objetos de la sesión no deben mantenerse abiertos durante mucho tiempo, ya que generalmente no son seguros 
+para subprocesos y deben crearse y destruirse según sea necesario.
+
+Objeto de transacción - Transaction Object
+==========================================
+
+Una transacción representa una unidad de trabajo con la base de datos y la mayoría de RDBMS admite la 
+funcionalidad de transacción.
+
+Las transacciones en Hibernate son manejadas por un administrador de transacciones subyacente y una 
+transacción (desde JDBC o JTA).
+
+Este es un objeto opcional y las aplicaciones de Hibernate pueden optar por no utilizar esta interfaz.
+
+Objeto de consulta - Query Object
+=================================
+
+Los objetos de consulta utilizan SQL o la cadena de lenguaje de consulta de Hibernate (HQL) para 
+recuperar datos de la base de datos y crear objetos.
+
+Criterio de objeto - Criteria Object
+====================================
+
+Los objetos de criterios se utilizan para crear y ejecutar consultas de criterios orientados a objetos 
+para recuperar objetos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
