@@ -1,0 +1,10 @@
+Una "Bag" es una colección java que almacena elementos sin importar la secuencia, pero permite elementos 
+duplicados en la lista. 
+
+Una "Bag" es una agrupación aleatoria de los objetos en la lista.
+
+Una colección se asigna con un elemento <bag> en la tabla de asignación y se inicializa con java.util.ArrayList.
+
+Ver Ejm en:
+
+https://www.tutorialspoint.com/hibernate/hibernate_bag_mapping.htm

@@ -1,0 +1,72 @@
+Una lista es una colección java que almacena elementos en secuencia y permite elementos duplicados.
+El usuario de esta interfaz tiene un control preciso sobre dónde se inserta cada elemento en la lista.
+El usuario puede acceder a los elementos por su índice de enteros y buscar elementos en la lista.
+
+Más formalmente, las listas normalmente permiten pares de elementos e1 y e2, de manera tal que 
+e1.equals (e2), y típicamente permiten múltiples elementos nulos si permiten elementos nulos en absoluto.
+
+Una lista se asigna con un elemento <list> en la tabla de asignación y se inicializa con java.util.ArrayList.
+
+Definir tablas RDBMS
+
+Considere una situación en la que necesitamos almacenar nuestros registros de empleados en la tabla 
+EMPLEADO, que tendrá la siguiente estructura:
+
+create table EMPLOYEE (
+   id INT NOT NULL auto_increment,
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL,
+   PRIMARY KEY (id)
+);
+
+Además, asuma que cada empleado puede tener uno o más certificados asociados con él / ella.
+Una asignación de recopilación de listas necesita una columna de índice en la tabla de recopilación(Certificados).
+
+La columna de índice define la posición del elemento en la colección.
+Por lo tanto, almacenaremos la información relacionada con el certificado en una tabla separada que tenga la 
+siguiente estructura:
+
+create table CERTIFICATE (
+   id INT NOT NULL auto_increment,
+   certificate_name VARCHAR(30) default NULL,
+   idx INT default NULL, 
+   employee_id INT default NULL,
+   PRIMARY KEY (id)
+);
+
+Habrá una relación de uno a varios entre los objetos EMPLEADO y CERTIFICADO.
+
+Definir clases de POJO
+======================
+
+Implementemos un empleado de la clase POJO , que se utilizará para conservar los objetos relacionados con 
+la tabla EMPLOYEE y tener una colección de certificados en la variable List .
+
+public class Employee {
+   private int id;
+   private String firstName; 
+   private String lastName;   
+   private int salary;
+   private List certificates;
+
+
+Necesitamos definir otra clase POJO correspondiente a la tabla CERTIFICATE para que los objetos de certificado 
+puedan almacenarse y recuperarse en la tabla CERTIFICATE.
+
+
+public class Certificate{
+   private int id;
+   private String name; 
+
+nota: Nose implementa los metodos toString y el compareTo.
+
+Definir archivo de mapeo de hibernación
+=======================================
+
+Crear clase de aplicación
+=========================
+
+Ver el ejemplo: hibernate-EjmListMapping
+
+

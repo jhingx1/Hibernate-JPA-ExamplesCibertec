@@ -1,0 +1,83 @@
+Una asociación de muchos a uno es el tipo más común de asociación donde un objeto puede asociarse con 
+múltiples objetos.
+
+Por ejemplo, el mismo objeto de dirección puede asociarse con varios objetos de empleado.
+
+Definir tablas RDBMS
+====================
+
+Considere una situación en la que necesitamos almacenar nuestros registros de empleados en la 
+tabla EMPLEADO, que tendrá la siguiente estructura:
+
+create table EMPLOYEE (
+   id INT NOT NULL auto_increment,
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL,
+   address    INT NOT NULL,
+   PRIMARY KEY (id)
+);
+
+Además, muchos empleados pueden tener la misma dirección, por lo que esta asociación se puede 
+presentar utilizando la asociación de muchos a uno. 
+
+Almacenaremos la información relacionada con la dirección en una tabla separada con la siguiente estructura:
+
+create table ADDRESS (
+   id INT NOT NULL auto_increment,
+   street_name VARCHAR(40) default NULL,
+   city_name VARCHAR(40) default NULL,
+   state_name VARCHAR(40) default NULL,
+   zipcode VARCHAR(10) default NULL,
+   PRIMARY KEY (id)
+);
+
+Cree ambas tablas RBDMS y manténgalas listas para la siguiente implementación.
+
+Definir clases de POJO
+======================
+
+Implementemos un empleado de la clase POJO , que se utilizará para conservar los objetos relacionados con 
+la tabla EMPLOYEE y con una variable de tipo de dirección.
+
+public class Employee{
+   private int id;
+   private String firstName; 
+   private String lastName;   
+   private int salary;
+   private Address address;
+
+Necesitamos definir otra clase de POJO correspondiente a la tabla de DIRECCIÓN para que los objetos de 
+dirección puedan almacenarse y recuperarse en la tabla de DIRECCIÓN.
+
+public class Address{
+   private int id;
+   private String street;     
+   private String city;     
+   private String state;    
+   private String zipcode; 
+
+Definir archivo de mapeo de hibernación
+=======================================
+
+Ver ejm hibernate-EjmMuchos-Uno
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+Una asociación de uno a uno es similar a la asociación de muchos a uno con una diferencia de que la columna 
+se establecerá como única. 
+
+Por ejemplo, un objeto de dirección se puede asociar con un solo objeto de empleado.
+
+Ver ejmplo : 
+hibernate-EjmUno-Uno
+

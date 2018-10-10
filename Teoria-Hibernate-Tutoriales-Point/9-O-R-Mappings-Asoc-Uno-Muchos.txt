@@ -1,0 +1,10 @@
+A -uno a varios mapeo puede ser implementado utilizando un conjunto de recogida de Java que no contiene 
+ningún elemento duplicado.
+
+Al no haber duplicado en una lista se debe de sobreescribir los metodos equals () y hashCode ().
+
+Un conjunto se asigna con un elemento <set> en la tabla de asignación y se inicializa con java.util.HashSet. 
+Puede usar Set collection en su clase cuando no se requiere ningún elemento duplicado en la colección.
+
+Ver ejmplo : 
+hibernate-EjmUno-Muchos

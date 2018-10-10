@@ -1,0 +1,14 @@
+Un SortedMap es una colección de Java similar al mapa que almacena elementos en pares de valores clave y 
+proporciona un orden total en sus llaves.
+
+No se permiten elementos duplicados en el mapa.
+
+El mapa se ordena de acuerdo con el orden natural de sus claves, o por un Comparador que se proporciona 
+normalmente en el momento de creación del mapa ordenado.
+
+Un SortedMap se asigna con un elemento <map> en la tabla de mapeo y un mapa ordenado se puede inicializar 
+con java.util.TreeMap.
+
+Ver EJM en:
+
+https://www.tutorialspoint.com/hibernate/hibernate_sortedmap_mapping.htm

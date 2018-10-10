@@ -1,0 +1,15 @@
+Asignaciones SortedSet
+
+Un SortedSet es una colección java que no contiene ningún elemento duplicado y los elementos se ordenan 
+utilizando su orden natural o un comparador proporcionado.
+
+Un SortedSet se asigna con un elemento <set> en la tabla de asignación y se inicializa con java.util.TreeSet.
+El atributo de "sort" se puede establecer en un comparador o en un orden natural.
+
+Si utilizamos un orden natural , su iterador atravesará el conjunto en orden ascendente de elementos.
+
+Ejm
+
+https://www.tutorialspoint.com/hibernate/hibernate_sortedset_mapping.htm
+
+nota:No se elaboro ejm en Netbeans.

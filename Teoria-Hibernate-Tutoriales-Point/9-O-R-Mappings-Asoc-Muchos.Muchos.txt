@@ -1,0 +1,44 @@
+Se puede implementar una asignación de muchos a muchos utilizando una colección java Set que no contiene 
+ningún elemento duplicado. 
+
+Un conjunto se asigna con un elemento <set> en la tabla de asignación y se inicializa con java.util.HashSet. 
+Puede usar Set collection en su clase cuando no se requiere ningún elemento duplicado en la colección.
+
+Definir tablas RDBMS
+====================
+
+Considere una situación en la que necesitamos almacenar nuestros registros de empleados en la tabla EMPLEADO, 
+que tendrá la siguiente estructura:
+
+create table EMPLOYEE (
+   id INT NOT NULL auto_increment,
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL,
+   PRIMARY KEY (id)
+);
+
+Además, suponga que cada empleado puede tener uno o más certificados asociados con él y que un certificado 
+similar puede asociarse con más de un empleado. 
+
+Empleado 1...* ------ 1..* Certificado
+
+Almacenaremos la información relacionada con el certificado en una tabla separada, que tiene la 
+siguiente estructura:
+
+create table CERTIFICATE (
+   id INT NOT NULL auto_increment,
+   certificate_name VARCHAR(30) default NULL,
+   PRIMARY KEY (id)
+);
+
+Ahora, para implementar una relación de muchos a muchos entre los objetos EMPLEADO y CERTIFICADO, tendríamos que 
+introducir una tabla intermedia más con ID de empleado e ID de certificado de la siguiente manera:
+
+create table EMP_CERT (
+   employee_id INT NOT NULL,
+   certificate_id INT NOT NULL,
+   PRIMARY KEY (employee_id,certificate_id)
+);
+
+Ver ejm: hibernate-EjmMuchos-Muchos

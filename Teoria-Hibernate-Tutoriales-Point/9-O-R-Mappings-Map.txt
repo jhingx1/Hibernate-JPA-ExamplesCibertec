@@ -1,0 +1,70 @@
+Un mapa es una colección java que almacena elementos en pares clave-valor y no permite elementos duplicados 
+en la lista.
+
+La interfaz del mapa proporciona tres vistas de colección, que permiten que el contenido de un mapa se vea 
+como un conjunto de claves, una colección de valores o un conjunto de asignaciones de clave-valor.
+
+Un mapa se asigna con un elemento <map> en la tabla de asignación y un mapa desordenado se puede inicializar 
+con java.util.HashMap.
+
+Definir tablas RDBMS
+====================
+
+Considere una situación en la que necesitamos almacenar nuestros registros de empleados en la 
+tabla EMPLEADO que tendrá la siguiente estructura:
+
+create table EMPLOYEE (
+   id INT NOT NULL auto_increment,
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL,
+   PRIMARY KEY (id)
+);
+
+Además, asuma que cada empleado puede tener uno o más certificados asociados con él/ella.
+Almacenaremos la información relacionada con el certificado en una tabla separada que tiene 
+la siguiente estructura:
+
+create table CERTIFICATE (
+   id INT NOT NULL auto_increment,
+   certificate_type VARCHAR(40) default NULL,
+   certificate_name VARCHAR(30) default NULL,
+   employee_id INT default NULL,
+   PRIMARY KEY (id)
+);
+
+Habrá una relación de uno a varios entre los objetos EMPLEADO y CERTIFICADO.
+
+Definir clases de POJO
+======================
+
+Implementemos un empleado de la clase POJO , que se utilizará para conservar los objetos relacionados con 
+la tabla EMPLOYEE y tener una colección de certificados en la variable List .
+
+public class Employee {
+   private int id;
+   private String firstName; 
+   private String lastName;   
+   private int salary;
+   private Map certificates;
+
+Necesitamos definir otra clase POJO correspondiente a la tabla CERTIFICATE para que los objetos de certificado 
+puedan almacenarse y recuperarse en la tabla CERTIFICATE.
+
+public class Certificate{
+   private int id;
+   private String name;
+
+Definir archivo de mapeo de hibernación
+=======================================
+
+
+Crear clase de aplicación
+=========================
+
+
+
+
+
+
+
