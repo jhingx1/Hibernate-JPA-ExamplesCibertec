@@ -8,6 +8,7 @@ select * from cliente;
 
 select * from employee;
 select * from certificate;
+select * from emp_cert;
 
 ########################
 
