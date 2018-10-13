@@ -12,34 +12,28 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-//mostrar lista de alumnos que tienen alguna nota 11 o alguna nota 12
-//arreglar los datos para que cumplan
-public class Prueba18 {
+//mostrar uso de parámetros (otro ejemplo)
+public class Prueba22 {
 
     public static void main(String[] args) {
         //obligatorio
         Session session
                 = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
+        //--------
 
-        //-----------------
-        String s = "select idalumno, nombre from Alumnos where "
-                + "idalumno in"
-                + "(select alumnos.idalumno from Notas "
-                + "where nota=11)"
-                + " and "
-                + "idalumno in"
-                + "(select alumnos.idalumno from Notas "
-                + "where nota=12)";
+        String s = "select distrito from Distritos "
+                + "where provincias.idprovincia = :idpro and "
+                + "provincias.departamentos.iddepartamento = :iddep";
         Query query = session.createQuery(s);
+        query.setInteger("idpro", 135); //
+        query.setInteger("iddep", 14); //
         Iterator it = query.iterate();
         while (it.hasNext()) {
-            Object[] fil = (Object[]) it.next();
-            ///System.out.println();
-            for (Object obj : fil) {
-                System.out.print(obj + "\t");
-            }
+            Object fil = (Object) it.next();
+            System.out.println(fil);
         }
+
         //Obligatorio        
         session.getTransaction().commit();
     }
