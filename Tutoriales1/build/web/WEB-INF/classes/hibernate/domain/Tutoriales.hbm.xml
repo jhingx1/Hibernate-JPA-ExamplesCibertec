@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2018 10:15:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.domain.Tutoriales" table="tutoriales" catalog="parainfo" optimistic-lock="version">
+        <id name="idtutorial" type="java.lang.Integer">
+            <column name="idtutorial" />
+            <generator class="identity" />
+        </id>
+        <property name="titulo" type="string">
+            <column name="titulo" length="200" not-null="true" unique="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="20" not-null="true" />
+        </property>
+        <property name="precio" type="double">
+            <column name="precio" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
