@@ -28,6 +28,18 @@ left join notas n
 on a.idalumno = n.idalumno
 group by a.nombre;
 
+
+select a.nombre,avg(n.idnota)
+from alumnos a
+left join notas n
+on a.idalumno = n.idalumno
+group by a.nombre
+order by a.nombre;
+
+select idalumno, nombre from alumnos where idalumno in (select alumnos.idalumno from Notas where nota=11)
+and idalumno in (select alumnos.idalumno from Notas where nota=12);
+
+
 ########################
 
 select dep.departamento,p.provincia,d.distrito from departamentos dep
