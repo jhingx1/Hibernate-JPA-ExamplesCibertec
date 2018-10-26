@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/a.css"/>
+        <h:outputStylesheet name="parainfo/form.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/form.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+        
+        <h:outputScript name="js/autores.js"/>
+    </h:head>
+    <h:body>
+        <h:form class="parainfo" style="margin: auto;display: table">
+            <fieldset>
+                <legend>Nuevo Profesor</legend>
+
+                <h:panelGrid columns="2" class="tabla">
+                    <h:outputLabel for="nomprofesor" value="Profesor" />
+                    <h:inputText value="#{mbProfesores.profesores.nombreprofesores}"
+                                 id="nombreprofesores" style="width: 300px" required="true"
+                                 requiredMessage="* Ingrese Profesor"
+                                 validatorMessage="* Entre [3, 200] caracteres">
+                        <f:validateLength minimum="3" maximum="100"/>
+                    </h:inputText>
+                    
+                    <h:outputLabel for="carrera" value="Carrera" />
+                    <h:inputText value="#{mbProfesores.profesores.carrera}"
+                                 id="carrera" style="width: 300px" required="true"
+                                 requiredMessage="* Ingrese Carrera"
+                                 validatorMessage="* Entre [3, 200] caracteres">
+                        <f:validateLength minimum="3" maximum="100"/>
+                    </h:inputText>
+                    
+                    <h:outputLabel for="fechaingreso" value="Fecha Ingreso" style="padding:2px;"/>                    
+                    <p:calendar value="#{mbProfesores.profesores.fechaingreso}" locale="es"
+                                showOn="button" pattern="dd/MM/yyyy" id="inicio">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />        
+                    </p:calendar>
+                    
+                    <h:outputLabel for="tipocontrato" value="Tipo Contrato" />
+                    <h:inputText value="#{mbProfesores.profesores.tipocontrato}"
+                                 id="tipcontrato" style="width: 300px" required="true"
+                                 requiredMessage="* Ingrese Contrato"
+                                 validatorMessage="* Entre [3, 200] caracteres">
+                        <f:validateLength minimum="3" maximum="100"/>
+                    </h:inputText>
+                    
+                </h:panelGrid>
+
+                <p style="text-align: center">
+                    <h:commandButton action="#{mbProfesores.profesoresIns()}"
+                                     value="Grabar Datos" type="submit"/> 
+                </p>
+                <p style="text-align: center">
+                    <h:commandLink value="Cancelar" action="/autoresQry"
+                                   immediate="true" class="parainfo"/>
+                </p>
+            </fieldset>
+
+            <!-- para errores de validación  -->
+            <div class="msg_error_valida">
+                <h:message for="profesor"/>
+            </div>
+        </h:form>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbProfesores.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+    </h:body>
+</html>
+

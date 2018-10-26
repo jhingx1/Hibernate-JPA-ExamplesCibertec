@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/a.css"/>
+        <h:outputStylesheet name="parainfo/form.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/form.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+        <h:outputScript name="js/frases.js"/>
+    </h:head>
+    <h:body>
+        <h:form class="parainfo" style="margin: auto;display: table">
+            <fieldset>
+                <legend>Nuevo Curso</legend>
+
+                <h:panelGrid columns="2" style="margin: auto">
+
+                    <h:outputLabel for="nombrecurso" value="Curso" />
+                    <h:inputText value="#{mbCursos.nombrecursos}"
+                                 id="curso" style="width: 300px">
+                    </h:inputText>
+
+                    <h:outputLabel for="descripcion" value="Descripcion" />
+                    <h:inputText value="#{mbCursos.descripcion}"
+                                 id="descripcion" style="width: 300px">                        
+                    </h:inputText>
+                    
+                    <h:outputLabel for="fechainicio" value="Fecha Inicio" style="padding:2px;"/>                    
+                    <p:calendar value="#{mbCursos.fechainicio}" locale="es"
+                                showOn="button" pattern="dd/MM/yyyy" id="inicio">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />        
+                    </p:calendar>
+                    
+                    <h:outputLabel for="fechafin" value="Fecha Fin" style="padding:2px;"/>                    
+                    <p:calendar value="#{mbCursos.fechafin}" locale="es"
+                                showOn="button" pattern="dd/MM/yyyy" id="fin">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />        
+                    </p:calendar>
+                    
+                    <h:outputLabel for="tipo" value="Tipo" />
+                    <h:inputText value="#{mbCursos.tipo}"
+                                 id="tipo" style="width: 300px">
+                    </h:inputText>
+                    
+                    <h:outputLabel for="horas" value="Horas" />
+                    <h:inputText value="#{mbCursos.horas}"
+                                 id="horas" style="width: 300px">
+                    </h:inputText>
+                    
+
+                    <h:outputLabel for="idprofesores" value="Profesor" />
+                    <h:selectOneMenu value="#{mbCursos.idprofesores}"
+                                     id="idprofesores" style="width: 310px">
+                        <f:selectItems value="#{mbCursos.combo}" var="a"
+                                       itemValue="#{a.idprofesores}"
+                                       itemLabel="#{a.nombreprofesores}"/>
+                    </h:selectOneMenu>
+                  
+                </h:panelGrid>
+
+                <p style="text-align: center">
+                    <h:commandButton action="#{mbCursos.cursosIns()}"
+                                     value="Grabar Datos" type="submit"/>
+                </p>
+                <p style="text-align: center">
+                    <h:commandLink value="Cancelar" action="/index"
+                                   immediate="true" class="parainfo"/>
+                </p>
+            </fieldset>
+
+            <!-- para errores de validación  -->
+            <div class="msg_error_valida">
+                <h:message for="curso"/>
+            </div>
+        </h:form>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbCursos.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+    </h:body>
+</html>
+
