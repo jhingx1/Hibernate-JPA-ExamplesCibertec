@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/table.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/table.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+        <h:outputScript name="js/frases.js"/>
+    </h:head>
+    <h:body>
+        <table class="parainfo" style="margin: auto;width: 560px">
+            <thead>
+                <tr>
+                    <th class="crud">
+                        <a class="qry" href="#" onclick="autoresQry();" 
+                           title="Lista de Autores"><span></span></a>
+                    </th>
+                    <td>Autor</td>
+                    <td>Frase</td>
+                    <th class="crud">
+                        <a class="ins" href="#" onclick="frasesIns();" 
+                           title="Nuevo Registro"><span></span></a>
+                    </th>
+                    <th class="crud">
+                        <a class="del" href="#" onclick="frasesDel();"
+                           title="Retirar Registros"><span></span></a>
+                    </th>
+                    <th class="crud">
+                        <a class="upd" href="#" onclick="frasesUpd();"
+                           title="Actualizar Registro"><span></span></a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="f" items="#{mbFrases.list}">
+                    <tr>
+                        <td colspan="2">#{f[1]}</td>
+                        <td colspan="2">#{f[2]}</td>
+                        <th>
+                            <input type="checkbox" name="idfrase_del" 
+                                   value="#{f[0]}"/>
+                        </th>
+                        <th>
+                            <input type="radio" name="idfrase_upd" 
+                                   value="#{f[0]}"/>
+                        </th>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- mensajes del servidor -->
+        <div class="msg_error ui-state-highlight ui-corner-all"></div>
+
+        <!-- mensajes lado del cliente -->
+        <div style="display: none">
+            <div id="dlg_message"><p id="message"></p></div>
+        </div>
+
+        <!-- retirar autores -->
+        <h:form id="form_del">
+            <h:inputHidden id="ids" value="#{mbFrases.ids}"/>
+            <h:commandButton 
+                id="frasesDel" style="display: none;" type="submit"
+                actionListener="#{mbFrases.frasesDel()}"/>
+        </h:form>
+
+        <!-- actualizar autor -->
+        <h:form id="form_get">
+            <h:inputHidden id="idfrase" 
+                           value="#{mbFrases.idfrase}"/>
+            <h:commandButton 
+                id="frasesGet" style="display: none;" type="submit"
+                action="#{mbFrases.frasesGet()}"/>
+        </h:form>
+    </h:body>
+</html>
+
