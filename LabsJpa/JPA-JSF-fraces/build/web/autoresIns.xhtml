@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/a.css"/>
+        <h:outputStylesheet name="parainfo/form.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/form.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+        
+        <h:outputScript name="js/autores.js"/>
+    </h:head>
+    <h:body>
+        <h:form class="parainfo" style="margin: auto;display: table">
+            <fieldset>
+                <legend>Nuevo Autor</legend>
+
+                <h:panelGrid columns="2" class="tabla">
+                    <h:outputLabel for="autor" value="Autor" />
+                    <h:inputText value="#{mbAutores.autores.autor}"
+                                 id="autor" style="width: 300px" required="true"
+                                 requiredMessage="* Ingrese Autor"
+                                 validatorMessage="* Entre [3, 200] caracteres">
+                        <f:validateLength minimum="3" maximum="100"/>
+                    </h:inputText>
+                </h:panelGrid>
+
+                <p style="text-align: center">
+                    <h:commandButton action="#{mbAutores.autoresIns()}"
+                                     value="Grabar Datos" type="submit"/> 
+                </p>
+                <p style="text-align: center">
+                    <h:commandLink value="Cancelar" action="/autoresQry"
+                                   immediate="true" class="parainfo"/>
+                </p>
+            </fieldset>
+
+            <!-- para errores de validación  -->
+            <div class="msg_error_valida">
+                <h:message for="autor"/>
+            </div>
+        </h:form>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbAutores.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+    </h:body>
+</html>
+
