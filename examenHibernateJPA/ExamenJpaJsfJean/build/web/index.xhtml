@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/table.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/table.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+       <h:outputScript name="js/preguntas.js"/>
+    </h:head>
+    <h:body>
+        <table class="parainfo" style="margin: auto;width: 560px">
+            <thead>
+               <tr>
+                    <th class="crud">
+                        <a class="qry" href="#" onclick="examenesQry();"
+                           title="Lista de Examenes"><span></span></a>
+                    </th>
+
+                    <td>Examen</td>
+                    <td>Tipo Pregunta</td>
+                    <td>Nivel Prioridad</td>                    
+                    <th class="crud">
+                        <a class="ins" href="#" onclick="preguntasIns();"
+                           title="Nuevo Registro"><span></span></a>
+                    </th>
+                    <th class="crud">
+                        <a class="del" href="#" onclick="preguntasDel();"
+                           title="Retirar Registros"><span></span></a>
+                    </th>
+                    <th class="crud">
+                        <a class="upd" href="#" onclick="preguntasUpd();"
+                           title="Actualizar Registro"><span></span></a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="a" items="#{mbPreguntas.list}">
+                    <tr>
+                        <td colspan="2">#{a[1]}</td>
+                        <td >#{a[2]}</td>
+                        <td colspan="2">#{a[3]}</td>
+                        <th>
+                            <input type="checkbox" name="idpregunta_del" 
+                                   value="#{a[0]}"/>
+                        </th>
+                        <th>
+                            <input type="radio" name="idpregunta_upd" 
+                                   value="#{a[0]}"/>
+                        </th>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbPreguntas.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+
+        <!-- mensajes lado del cliente -->
+        <div style="display: none">
+            <div id="dlg_message"><p id="message"></p></div>
+        </div>
+
+        <!-- retirar documentos -->
+        <h:form id="form_del">
+            <h:inputHidden id="ids" value="#{mbPreguntas.ids}"/>
+            <h:commandButton 
+                id="preguntasDel" style="display: none;" type="submit"
+                actionListener="#{mbPreguntas.preguntasDel()}"/>
+        </h:form>
+
+        <!-- actualizar autor -->
+        <h:form id="form_get">
+            <h:inputHidden id="idpregunta" 
+                           value="#{mbPreguntas.idpregunta}"/>
+            <h:commandButton 
+                id="preguntasGet" style="display: none;" type="submit"
+                action="#{mbPreguntas.preguntasGet()}"/>
+        </h:form>
+    </h:body>
+</html>
+

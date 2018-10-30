@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/a.css"/>
+        <h:outputStylesheet name="parainfo/form.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/form.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+        <h:outputScript name="js/preguntas.js"/>
+        
+         <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+        </script>
+    </h:head>
+    <h:body>
+        <h:form class="parainfo" style="margin: auto;display: table">
+            <fieldset>
+                <legend>Nuevos Preguntas</legend>
+
+                <h:panelGrid columns="2" class="tabla">
+                                        
+                    <h:outputLabel for="idexamen" value="Examen" />
+                    <h:selectOneMenu value="#{mbPreguntas.idexamen}"
+                                     id="iddocumento" style="width: 310px">
+                        <f:selectItems value="#{mbPreguntas.comboDocumento}" var="a"
+                                       itemValue="#{a.idexamen}"
+                                       itemLabel="#{a.titulo}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="pregunta" value="Pregunta" />
+                    <h:inputText value="#{mbPreguntas.pregunta}" 
+                                     id="pregunta" required="true"
+                                     style="width: 300px;" 
+                                     requiredMessage="* Ingrese Pregunta">
+
+                    </h:inputText>
+                    
+                    <h:outputLabel for="prioridad" value="Prioridad" />
+                    <h:inputText value="#{mbPreguntas.prioridad}" 
+                                     id="nombre" required="true"
+                                     style="width: 300px;" 
+                                     requiredMessage="* Ingrese Prioridad">
+                    </h:inputText>
+                    
+                </h:panelGrid>
+
+                <p style="text-align: center">
+                    <h:commandButton action="#{mbPreguntas.preguntasIns()}"
+                                     value="Grabar Datos" type="submit"/>
+                </p>
+                <p style="text-align: center">
+                    <h:commandLink value="Cancelar" action="/index"
+                                   immediate="true" class="parainfo"/>
+                </p>
+            </fieldset>
+
+            <!-- para errores de validación  -->
+            
+            <div>
+                <p:messages id="msgs" />   
+            </div>
+                
+        </h:form>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbPreguntas.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+    </h:body>
+</html>
+

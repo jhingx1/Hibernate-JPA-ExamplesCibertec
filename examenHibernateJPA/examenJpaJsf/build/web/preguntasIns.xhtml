@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/a.css"/>
+        <h:outputStylesheet name="parainfo/form.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-3.3.1.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/form.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+        <h:outputScript name="js/frases.js"/>
+    </h:head>
+    <h:body>
+        <h:form class="parainfo" style="margin: auto;display: table">
+            <fieldset>
+                <legend>Nueva Pregunta</legend>
+
+                <h:panelGrid columns="2" style="margin: auto">
+                    <h:outputLabel for="pregunta" value="Pregunta" />
+                    <h:inputText value="#{mbPreguntas.pregunta}"
+                                 id="curso" style="width: 300px">
+                    </h:inputText>
+
+                    <h:outputLabel for="prioridad" value="Prioridad" />
+                    <h:inputText value="#{mbPreguntas.prioridad}"
+                                 id="prioridad" style="width: 300px">                        
+                    </h:inputText>
+                    <h:outputLabel for="idpreguntas" value="Tipo Pregunta" />
+                    <h:selectOneMenu value="#{mbPreguntas.idexamenes}"
+                                     id="idexamenes" style="width: 310px">
+                        <f:selectItems value="#{mbPreguntas.combo}" var="p"
+                                       itemValue="#{p.idexamen}"
+                                       itemLabel="#{p.titulo}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+
+                <p style="text-align: center">
+                    <h:commandButton action="#{mbPreguntas.preguntasIns()}"
+                                     value="Grabar Datos" type="submit"/>
+                </p>
+                <p style="text-align: center">
+                    <h:commandLink value="Cancelar" action="/index"
+                                   immediate="true" class="parainfo"/>
+                </p>
+            </fieldset>
+
+            <!-- para errores de validación  -->
+            <div class="msg_error_valida">
+                <h:message for="pregunta"/>
+            </div>
+        </h:form>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbPreguntas.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+    </h:body>
+</html>
+
